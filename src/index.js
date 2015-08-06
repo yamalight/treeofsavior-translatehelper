@@ -2,12 +2,7 @@
 import React from 'react';
 import Chrome from './components/chrome';
 import Filepicker from './components/filepicker';
-
-// const file = fs.readFileSync('./EnglishTranslation/ETC.tsv').toString();
-// const lines = file.split('\n');
-// const symbols = lines[0].split('\t');
-// console.log(lines[0]);
-// console.log(symbols);
+import Fileview from './components/fileview';
 
 class App extends React.Component {
     constructor(props) {
@@ -29,6 +24,7 @@ class App extends React.Component {
 
                 <Chrome>
                     {!this.state.file ? (<h1>Hi there! Select a file to start</h1>) : ''}
+                    <Fileview file={this.state.file} />
                 </Chrome>
             </div>
         );

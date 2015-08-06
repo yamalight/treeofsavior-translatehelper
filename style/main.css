@@ -1,0 +1,25 @@
+.small-well {
+    padding: 5px;
+    margin-bottom: 0;
+}
+
+.padded {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.row-separator {
+    clear: both;
+    overflow: hidden;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.row-separator:before {
+    content: "";
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    float: right;
+}

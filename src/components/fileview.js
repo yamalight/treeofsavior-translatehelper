@@ -7,7 +7,10 @@ export default class Fileview extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = Object.assign({page: 0}, props);
+        this.state = Object.assign({
+            page: 0,
+            hide: false,
+        }, props);
     }
 
     componentWillReceiveProps(props) {
@@ -29,6 +32,20 @@ export default class Fileview extends React.Component {
         }
     }
 
+    handleHide() {
+        this.setState({hide: !this.state.hide});
+    }
+
+    getData() {
+        return this.state.data.filter((it) => {
+            if (!this.state.hide) {
+                return true;
+            }
+
+            return !it.english || !it.english.length;
+        });
+    }
+
     nextPage() {
         this.setState({page: this.state.page + 1});
     }
@@ -44,7 +61,7 @@ export default class Fileview extends React.Component {
 
     pages() {
         return Array.from(
-            Array(Math.floor(this.state.data.length / 20)).keys()
+            Array(Math.floor(this.getData().length / 20)).keys()
         );
     }
 
@@ -56,23 +73,33 @@ export default class Fileview extends React.Component {
         return (
             <div>
                 <div className="row">
+                    <div className="checkbox">
+                        <label>
+                            <input type="checkbox" onChange={::this.handleHide} value={this.state.hide} />
+                            Hide translated
+                        </label>
+                    </div>
+                </div>
+                <div className="row well small-well">
                     <div className="col-xs-4">ID</div>
                     <div className="col-xs-4">English</div>
                     <div className="col-xs-4">Korean</div>
                 </div>
-                {this.state.data.slice(this.state.page * PAGE_SIZE, this.state.page * PAGE_SIZE + PAGE_SIZE)
+                {this.getData().slice(this.state.page * PAGE_SIZE, this.state.page * PAGE_SIZE + PAGE_SIZE)
                     .map((it) => {
-                        return (
-                            <div className="row" key={it.id}>
+                        return [
+                            <div key={it.id}
+                                className={'row padded' + (it.english && it.english.length > 0 ? ' bg-success' : '')}>
                                 <div className="col-xs-4">{it.id}</div>
                                 <div className="col-xs-4">{it.english}</div>
                                 <div className="col-xs-4">{it.korean}</div>
-                            </div>
-                        );
+                            </div>,
+                            <div className="row-separator" key={'separator_' + it.id}></div>
+                        ];
                     })
                 }
-                <div className="row">
-                    <ul className="pagination pagination-lg">
+                <div className="row well small-well" style={{textAlign: 'center'}}>
+                    <ul className="pagination" style={{margin: 0}}>
                         <li>
                             <a href="#" onClick={::this.prevPage}>
                                 <span>&laquo;</span>

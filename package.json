@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "babel": "^5.8.21",
-    "react": "^0.13.3"
+    "bootstrap": "^3.3.5",
+    "react": "^0.13.3",
+    "tsv": "^0.2.0"
   }
 }

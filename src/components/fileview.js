@@ -42,7 +42,7 @@ export default class Fileview extends React.Component {
                 return true;
             }
 
-            return !it.english || !it.english.length;
+            return !it.english || !it.english.trim().length;
         });
     }
 
@@ -89,7 +89,7 @@ export default class Fileview extends React.Component {
                     .map((it) => {
                         return [
                             <div key={it.id}
-                                className={'row padded' + (it.english && it.english.length > 0 ? ' bg-success' : '')}>
+                                className={'row padded' + (it.english && it.english.trim().length > 0 ? ' bg-success' : '')}>
                                 <div className="col-xs-4">{it.id}</div>
                                 <div className="col-xs-4">{it.english}</div>
                                 <div className="col-xs-4">{it.korean}</div>

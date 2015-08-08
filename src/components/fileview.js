@@ -12,6 +12,7 @@ export default class Fileview extends React.Component {
             page: 0,
             hide: false,
             hideBroken: false,
+            showPageInput: false,
         }, props);
     }
 
@@ -39,10 +40,10 @@ export default class Fileview extends React.Component {
     }
 
     handleHide() {
-        this.setState({hide: !this.state.hide});
+        this.setState({hide: !this.state.hide, page: 0});
     }
     handleHideBroken() {
-        this.setState({hideBroken: !this.state.hideBroken});
+        this.setState({hideBroken: !this.state.hideBroken, page: 0});
     }
 
     getData() {
@@ -75,7 +76,17 @@ export default class Fileview extends React.Component {
     }
 
     selectPage() {
+        this.setState({showPageInput: true});
+    }
 
+    handlePageKeyPress(e) {
+        if (e.key === 'Enter') {
+            const page = parseInt(this.refs.pageInput.getDOMNode().value, 10) - 1;
+            if (!isNaN(page)) {
+                this.refs.pageInput.getDOMNode().value = '';
+                this.setState({page, showPageInput: false});
+            }
+        }
     }
 
     pages() {
@@ -119,6 +130,11 @@ export default class Fileview extends React.Component {
                                 {this.state.page + 1}
                             </span>
                         </h3>
+                        {this.state.showPageInput ? (
+                            <input type="text" className="form-control" ref="pageInput"
+                                placeholder="Select a page to go to.."
+                                onKeyPress={::this.handlePageKeyPress}/>
+                        ) : ''}
                     </div>,
                     <div className="row small-well" style={{textAlign: 'center'}} key="paging">
                         <ul className="pagination" style={{margin: 0}}>

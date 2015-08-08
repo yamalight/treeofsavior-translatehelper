@@ -1,8 +1,11 @@
 import fs from 'fs';
 
-export default () => {
+export default (path) => {
+    if (!path) {
+        return [];
+    }
     // get local tsv files
-    return fs.readdirSync('./EnglishTranslation')
+    return fs.readdirSync(path)
         .filter(f => f.endsWith('_kor.tsv'))
         .map((file) => {
             return {

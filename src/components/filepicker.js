@@ -6,7 +6,7 @@ export default class Filepicker extends React.Component {
         super(props);
 
         this.state = {
-            files: getFilesList(),
+            files: getFilesList(props.folder),
             file: null,
             open: false
         };

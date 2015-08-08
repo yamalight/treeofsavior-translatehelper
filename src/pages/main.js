@@ -9,11 +9,8 @@ export default class MainPage extends React.Component {
 
         this.state = {
             file: null,
+            folder: localStorage.getItem('folder'),
         };
-    }
-
-    componentWillMount() {
-        this.setState(this.context.router.getCurrentQuery());
     }
 
     handleFile(file) {
@@ -26,8 +23,12 @@ export default class MainPage extends React.Component {
                 <Filepicker fileSelected={::this.handleFile} folder={this.state.folder} />
 
                 <Chrome>
-                    {!this.state.file ? (<h1>Hi there! Select a file to start</h1>) : ''}
-                    <Fileview file={this.state.file} />
+                    {!this.state.file ? (
+                        <div className="row" style={{textAlign: 'center'}}>
+                            <h1>Select a file to start translating!</h1>
+                        </div>
+                    ) : ''}
+                    <Fileview file={this.state.file} folder={this.state.folder} />
                 </Chrome>
             </div>
         );

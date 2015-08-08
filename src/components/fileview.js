@@ -15,8 +15,8 @@ export default class Fileview extends React.Component {
 
     componentWillReceiveProps(props) {
         if (props.file !== this.state.file) {
-            const english = loadFile(props.file.english);
-            const korean = loadFile(props.file.korean);
+            const english = loadFile(this.state.folder, props.file.english);
+            const korean = loadFile(this.state.folder, props.file.korean);
             const data = english.map((it, i) => {
                 return {
                     id: it.id,

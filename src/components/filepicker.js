@@ -35,13 +35,18 @@ export default class Filepicker extends React.Component {
                             {this.state.files.map((file) => {
                                 return (
                                     <li key={file.name} onClick={this.selectFile.bind(this, file)}>
-                                        <a href="#">{file.name}</a>
+                                        <a href="#" onClick={(e) => e.preventDefault()}>
+                                            {file.name}
+                                        </a>
                                     </li>
                                 );
                             })}
                         </ul>
                     </li>
                 </ul>
+                <div className="navbar-right">
+                    <img src="images/tos_logo.png" style={{maxHeight: 50}} />
+                </div>
             </nav>
         );
     }

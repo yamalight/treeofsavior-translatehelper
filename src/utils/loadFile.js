@@ -1,8 +1,9 @@
 import fs from 'fs';
+import path from 'path';
 
-export default (file) => {
+export default (folder, file) => {
     // get local tsv files
-    return fs.readFileSync('./EnglishTranslation/' + file)
+    return fs.readFileSync(path.join(folder, file))
         .toString()
         .split('\n')
         .map((line) => {

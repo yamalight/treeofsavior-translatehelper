@@ -17,13 +17,13 @@ export default class IntroPage extends React.Component {
 
     componentDidMount() {
         if (this.state.folder) {
-            this.redirectToFolder(this.state.folder);
+            this.redirectToMain();
         }
     }
 
-    redirectToFolder(folder) {
+    redirectToMain() {
         const {router} = this.context;
-        router.transitionTo('main', {}, {folder});
+        router.transitionTo('main');
     }
 
     handleFolderFind() {
@@ -31,7 +31,7 @@ export default class IntroPage extends React.Component {
             properties: ['openDirectory'],
         });
         localStorage.setItem('folder', folder);
-        this.redirectToFolder(folder);
+        this.redirectToMain();
     }
 
     render() {

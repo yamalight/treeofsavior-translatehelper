@@ -4,11 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "electron ."
+    "test": "electron .",
+    "package-mac": "electron-packager ./ TreeOfSavior-TranslateHelper --platform=darwin --arch=x64 --version=0.30.3",
+    "package-win32": "electron-packager ./ TreeOfSavior-TranslateHelper --platform=win32 --arch=ia32 --version=0.30.3",
+    "package-win64": "electron-packager ./ TreeOfSavior-TranslateHelper --platform=win32 --arch=x64 --version=0.30.3",
+    "package": "npm run package-mac && npm run package-win32 && npm run package-win64"
   },
   "author": "Tim Ermilov <yamalight@gmail.com> (http://codezen.net)",
   "license": "MIT",
   "devDependencies": {
+    "electron-packager": "^5.0.1",
     "electron-prebuilt": "^0.30.2"
   },
   "dependencies": {
